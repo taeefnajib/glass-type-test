@@ -38,7 +38,7 @@ def fit_model(X_train, y_train, n_neighbors):
 
 
 # define workflow
-def run_wf(hp: Hyperparameters) ->KNeighborsClassifier:
+def run_wf(hp: Hyperparameters):
     train_df = get_data(hp.filepath)
     train_df = clean_data(df=train_df)
     X_train, X_test, y_train, y_test = split_data(df=train_df, test_size=hp.test_size, random_state=hp.random_state)
