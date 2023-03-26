@@ -5,6 +5,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import accuracy_score
 from dataclasses_json import dataclass_json
 from dataclasses import dataclass
+import pathlib
 
 @dataclass_json
 @dataclass
@@ -18,7 +19,7 @@ hp = Hyperparameters
 
 # get data
 def get_data(filepath):
-    return pd.read_csv(filepath)
+    return pd.read_csv((pathlib.Path(__file__).parent / filepath).resolve())
 
 # clean data
 def clean_data(df):

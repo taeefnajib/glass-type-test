@@ -5,6 +5,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import accuracy_score
 from dataclasses_json import dataclass_json
 from dataclasses import dataclass
+import pathlib
 
 @dataclass_json
 @dataclass
@@ -18,7 +19,7 @@ hp = Hyperparameters
 
 # get data
 def get_data(filepath):
-    return pd.read_csv(filepath)
+    return pd.read_csv((pathlib.Path(__file__).parent / filepath).resolve())
 
 # clean data
 def clean_data(df):
@@ -38,7 +39,7 @@ def fit_model(X_train, y_train, n_neighbors):
 
 
 # define workflow
-def run_wf(hp: Hyperparameters):
+def run_wf(hp: Hyperparameters) ->KNeighborsClassifier:
     train_df = get_data(hp.filepath)
     train_df = clean_data(df=train_df)
     X_train, X_test, y_train, y_test = split_data(df=train_df, test_size=hp.test_size, random_state=hp.random_state)
